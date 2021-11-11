@@ -1,14 +1,19 @@
-from flask import Flask
-from recursos.routes.routes import *
+from flask import Flask, render_template
+app = Flask(__name__)  
+ 
+@app.route('/')  
+def home():  
+    return render_template('index.html'); 
 
-app = Flask(__name__)
+@app.route('/home/add_product')  
+def add_product():  
+    return render_template('page-add-product.html');   
 
-#rutas de la aplicacion
-app.add_url_rule(routes["hello_route"], view_func=routes["hello_controller"])
+@app.route('/home/error')  
+def error():  
+    return render_template('404.html');  
+  
+if __name__ =="__main__":  
+    app.run(debug = True)  
 
-#Ruta del error 404
-app.register_error_handler(routes["not_found_route"], routes["not_found_controller"])
 
-@app.route('/404')
-def index():
-    return render_template('404.html')
