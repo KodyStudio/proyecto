@@ -1,5 +1,9 @@
 from flask import Flask, render_template
+from cs50 import SQL
+
 app = Flask(__name__)
+
+db = SQL("sqlite:///register.db")
 
 
 @app.route('/')
@@ -20,6 +24,11 @@ def error():
 @app.route('/home/base')
 def base():
     return render_template('base.html')
+
+
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    return render_template('register.html')
 
 
 @app.route('/login')

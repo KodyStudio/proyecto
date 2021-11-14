@@ -1,0 +1,16 @@
+CREATE TABLE `registro` (
+  `id` int(11) NOT NULL,
+  `usuario` text NOT NULL,
+  `contrasena` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Índices para tablas volcadas
+--
+
+--
+-- Indices de la tabla `registro`
+--
+ALTER TABLE `registro`
+  ADD PRIMARY KEY (`id`);
+COMMIT;
