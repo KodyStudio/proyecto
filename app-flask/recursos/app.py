@@ -3,8 +3,6 @@ from cs50 import SQL
 
 app = Flask(__name__)
 
-db = SQL("sqlite:///register.db")
-
 
 @app.route('/')
 def home():
