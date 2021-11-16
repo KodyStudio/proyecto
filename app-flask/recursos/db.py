@@ -6,4 +6,13 @@ import sqlite3
 # c.execute()
 
 # conn.commit()
-# sqlite3 = sqlite3.connect(host='localhost', port=3306, user='root',passwd='', database='db-flask')
+
+# app.config['MYSQL_HOST'] = 'localhost'
+# app.config['MYSQL_USER'] = 'root'
+# app.config['MYSQL_PASSWORD'] = ''
+# app.config['MYSQL_DB'] = 'register'
+
+# mysqlite = mysqlite3(app.config)
+
+# sqlite3 = sqlite3.connect(host='localhost', port=3306,
+#                           user='root', passwd='', database='register')
