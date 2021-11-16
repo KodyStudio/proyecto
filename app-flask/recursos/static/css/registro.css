@@ -1,0 +1,23 @@
+body, html{
+    height: 100%;
+    
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background: #0065ED;
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.from.registrer {
+    width: 400px;
+    background: #ffff;
+    padding: 40px;
+}
