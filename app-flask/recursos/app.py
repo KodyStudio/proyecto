@@ -1,7 +1,12 @@
-from flask import Flask, render_template
-from cs50 import SQL
+from flask import Flask, render_template, request
+# import sqlite3
+# import pymysql
 
 app = Flask(__name__)
+# conexion = pymysql.connect(host='localhost',
+#                            user='root',
+#                            password='',
+#                            db='register')
 
 
 @app.route('/')
@@ -24,9 +29,9 @@ def base():
     return render_template('base.html')
 
 
-@app.route('/register', methods=['GET', 'POST'])
+@app.route('/registro')
 def register():
-    return render_template('register.html')
+    return render_template('resgistro.html')
 
 
 @app.route('/login')

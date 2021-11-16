@@ -1,16 +1,21 @@
 {% extends 'base.html'%}
 
 {% block content %} 
+    {%  for pelicula in peliculas: %}
+        <p>{{ pelicula }}</p>
+    {%  endfor %}
+    <div class="container">
+        <div class="row">
+            <h1> entonces imaginate que aqui va a ir todo el contenido del dashboard que eso aun ni idea de como lo voy a hacer
+                pero ideay pero imagino que debe de a ver un script o algo asi UwU
+            </h1>
 
-<div class="container">
-    <div class="row">
-        <h1> entonces imaginate que aqui va a ir todo el contenido del dashboard que eso aun ni idea de como lo voy a hacer
-            pero ideay pero imagino que debe de a ver un script o algo asi UwU
-        </h1>
-
-        
+            {%  for pelicula in peliculas: %}
+                <p>{{ pelicula.id }}</p>
+                <p>{{ pelicula.usuario }}</p>
+            {%  endfor %}
+        </div>
     </div>
-</div>
 
 
 {% endblock %}
