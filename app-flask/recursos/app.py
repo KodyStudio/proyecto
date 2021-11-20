@@ -54,7 +54,7 @@ def register():
     # contrasena_enconde = contrasena.encode("utf-8")
     # contrasena_encriptado = bcrypt.hashpw(contrasena_encode, semilla)
 
-    return render_template('resgistro.html')
+    return render_template('registro.html')
 
 
 @app.route('/login')
