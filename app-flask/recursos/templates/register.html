@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LOGIN HTML</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link href="{{ url_for('static', filename='css/login.css') }}" rel="stylesheet">
+
+</head>
+    <body class="bg-gradient-primary"> 
+        <div class="container">
+            <div class="row justify-content-center">
+                <form action="index.html" class="form-box" >
+                    <h1 class="form-title">Bienvenido</h1>
+                        <div class="form-group">
+                            <input type="text" placeholder="username" class="form-control form-control-user">
+                        </div>
+                            <input type="password" placeholder="password" class="form-control form-control-user">
+        
+                            <a type="submit" href="" class="btn btn-primary btn-user btn-block">
+                            login
+                            </a>
+                </form>
+            </div>
+        </div>
+</body>
+</html>

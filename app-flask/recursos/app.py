@@ -1,12 +1,23 @@
+from re import M
 from flask import Flask, render_template, request
-# import sqlite3
+from flask_mysqldb import MySQL, MySQLdb
+import bcrypt
 # import pymysql
 
 app = Flask(__name__)
-# conexion = pymysql.connect(host='localhost',
-#                            user='root',
-#                            password='',
-#                            db='register')
+
+# La llave secreta
+app.secret_key = "applogin"
+
+# semilla para encriptamiento
+semilla = bcrypt.gensalt()
+
+# app.config['MYSQL_HOST'] = 'localhost'
+# app.config['MYSQL_USER'] = 'root'
+# app.config['MYSQL_PASSWORD'] = ''
+# app.config['MYSQL_DB'] = 'register'
+# mysql = MySQL(app)
+
 
 
 @app.route('/')
@@ -29,8 +40,21 @@ def base():
     return render_template('base.html')
 
 
-@app.route('/registro')
+@app.route('/registro', methods=["GET", "POST"])
 def register():
+
+    if(request.method == "POST"):
+        usuario = request.form['usuario']
+        contrasena = request.form['contrasena']
+
+        #creacion del cursor
+        cur = mysql.connection.cursor()
+
+        mysql.connection.commit()
+
+        # contrasena_enconde = contrasena.encode("utf-8")
+        # contrasena_encriptado = bcrypt.hashpw(contrasena_encode, semilla)
+
     return render_template('resgistro.html')
 
 
