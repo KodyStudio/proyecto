@@ -19,7 +19,6 @@ semilla = bcrypt.gensalt()
 # mysql = MySQL(app)
 
 
-
 @app.route('/')
 def home():
     return render_template('index.html')
@@ -47,10 +46,10 @@ def register():
         usuario = request.form['usuario']
         contrasena = request.form['contrasena']
 
-        #creacion del cursor
-        cur = mysql.connection.cursor()
+        # creacion del cursor
+        # cur = mysql.connection.cursor()
 
-        mysql.connection.commit()
+        # mysql.connection.commit()
 
         # contrasena_enconde = contrasena.encode("utf-8")
         # contrasena_encriptado = bcrypt.hashpw(contrasena_encode, semilla)
