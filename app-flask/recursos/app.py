@@ -42,17 +42,17 @@ def base():
 @app.route('/registro', methods=["GET", "POST"])
 def register():
 
-    if(request.method == "POST"):
-        usuario = request.form['usuario']
-        contrasena = request.form['contrasena']
+    # if(request.method == "POST"):
+    #     usuario = request.form['usuario']
+    #     contrasena = request.form['contrasena']
 
-        # creacion del cursor
-        # cur = mysql.connection.cursor()
+    # creacion del cursor
+    # cur = mysql.connection.cursor()
 
-        # mysql.connection.commit()
+    # mysql.connection.commit()
 
-        # contrasena_enconde = contrasena.encode("utf-8")
-        # contrasena_encriptado = bcrypt.hashpw(contrasena_encode, semilla)
+    # contrasena_enconde = contrasena.encode("utf-8")
+    # contrasena_encriptado = bcrypt.hashpw(contrasena_encode, semilla)
 
     return render_template('resgistro.html')
 
