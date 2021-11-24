@@ -1,23 +1,34 @@
-from re import M
-from flask import Flask, render_template, request
-from flask_mysqldb import MySQL, MySQLdb
-import bcrypt
-# import pymysql
+import os
+
+import requests
+from dotenv import load_dotenv
+from flask import Flask, session
+from flask_session import Session
+from sqlalchemy import create_engine
+from sqlalchemy.orm import scoped_session, sessionmaker
+from flask import Flask, flash, redirect, render_template, request, session
+from sqlalchemy.sql.elements import Null
+from tempfile import mkdtemp
+from werkzeug.security import check_password_hash, generate_password_hash
+from helpers import login_required
+from flask import jsonify
 
 app = Flask(__name__)
 
-# La llave secreta
-app.secret_key = "applogin"
+# Check for environment variable
+if not os.getenv("DATABASE_URL"):
+    raise RuntimeError("DATABASE_URL is not set")
 
-# semilla para encriptamiento
-semilla = bcrypt.gensalt()
+# Configure session to use filesystem
+app.config["SESSION_FILE_DIR"] = mkdtemp()
+app.config["SESSION_PERMANENT"] = False
+app.config["SESSION_TYPE"] = "filesystem"
 
-# app.config['MYSQL_HOST'] = 'localhost'
-# app.config['MYSQL_USER'] = 'root'
-# app.config['MYSQL_PASSWORD'] = ''
-# app.config['MYSQL_DB'] = 'register'
-# mysql = MySQL(app)
+Session(app)
 
+# Set up database
+engine = create_engine(os.getenv("DATABASE_URL"))
+db = scoped_session(sessionmaker(bind=engine))
 
 @app.route('/')
 def home():
@@ -42,9 +53,9 @@ def base():
 @app.route('/registro', methods=["GET", "POST"])
 def register():
 
-    # if(request.method == "POST"):
-    #     usuario = request.form['usuario']
-    #     contrasena = request.form['contrasena']
+    if(request.method == "POST"):
+        username = request.form['username']
+        password = request.form['password']
 
     # creacion del cursor
     # cur = mysql.connection.cursor()

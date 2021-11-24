@@ -12,3 +12,4 @@ db =scoped_session(sessionmaker(bind=engine))
 db.execute("CREATE TABLE users(id SERIAL PRIMARY KEY NOT NULL, username VARCHAR NOT NULL, hash VARCHAR NOT NULL)")
 db.commit()
 print("tablas creadas")
+
