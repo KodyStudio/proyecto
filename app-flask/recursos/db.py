@@ -1,18 +1,14 @@
-import sqlite3
+import os
 
-# conn = sqlite3.connect("login.db")
-# c = conn.cursos()
+from sqlalchemy import create_engine
+from sqlalchemy.orm import scoped_session, sessionmaker
+from dotenv import load_dotenv
 
-# c.execute()
+# Carga las variables de entorno que tengo en .env
+load_dotenv()
 
-# conn.commit()
-
-# app.config['MYSQL_HOST'] = 'localhost'
-# app.config['MYSQL_USER'] = 'root'
-# app.config['MYSQL_PASSWORD'] = ''
-# app.config['MYSQL_DB'] = 'register'
-
-# mysqlite = mysqlite3(app.config)
-
-# sqlite3 = sqlite3.connect(host='localhost', port=3306,
-#                           user='root', passwd='', database='register')
+engine= create_engine(os.getenv("DATABASE_URL"))
+db =scoped_session(sessionmaker(bind=engine))
+db.execute("CREATE TABLE users(id SERIAL PRIMARY KEY NOT NULL, username VARCHAR NOT NULL, hash VARCHAR NOT NULL)")
+db.commit()
+print("tablas creadas")
