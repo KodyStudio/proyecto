@@ -1,3 +1,4 @@
+# heroku account - correo: justinsilvac360@gmail.com password: KE:Y3fjpp.3MTb_ nombre:inventorycontrol
 import os
 
 from sqlalchemy import create_engine

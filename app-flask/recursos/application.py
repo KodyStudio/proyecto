@@ -63,11 +63,11 @@ def login():
 
         # Ensure username was submitted
         if not request.form.get("username"):
-            return apology("must provide username", 403)
+            return flash("must provide username", 403)
 
         # Ensure password was submitted
         elif not request.form.get("password"):
-            return apology("must provide password", 403)
+            return flash("must provide password", 403)
 
         # Query database for username
         rows = db.execute("SELECT * FROM users WHERE username = :username",
@@ -75,7 +75,7 @@ def login():
 
         # Ensure username exists and password is correct
         if len(rows) != 1 or not check_password_hash(rows[0]["hash"], request.form.get("password")):
-            return apology("invalid username and/or password", 403)
+            return flash("invalid username and/or password", 403)
 
         # Remember which user has logged in
         session["user_id"] = rows[0]["id"]
@@ -99,59 +99,40 @@ def logout():
     return redirect("/")
 
 
-@app.route("/quote", methods=["GET", "POST"])
-@login_required
-def quote():
-    """Get stock quote."""
-    if request.method == "POST":
-
-        symbol = request.form.get("symbol")
-
-        action = lookup(symbol)
-
-        if not action:
-            return apology("a")
-
-        return render_template("quoted.html", action=action)
-
-    else:
-        return render_template("quote.html")
-
-
 @app.route("/register", methods=["GET", "POST"])
 def register():
     """Register user"""
 
-    if request.method == "POST":
-        username = request.form.get('username')
-        password = request.form.get('password')
-        confirmation = request.form.get('confirmation')
-        # sustituir los apology por flash cuando hay un error y rederizar a registro.html
-        if not username:
-            return apology("Username es requerido", 400)
-        elif not password:
-            return apology("Password es requerido", 400)
-        elif not confirmation:
-            return apology("Confirmation es requerido", 400)
+    # if request.method == "POST":
+    #     username = request.form.get('username')
+    #     password = request.form.get('password')
+    #     confirmation = request.form.get('confirmation')
+    #     # sustituir los apology por flash cuando hay un error y rederizar a registro.html
+    #     if not username:
+    #         return flash("Username es requerido")
+    #     elif not password:
+    #         return flash("Password es requerido")
+    #     elif not confirmation:
+    #         return flash("Confirmation es requerido")
 
-        if password != confirmation:
-            return apology("Password no coinciden bro xd", 400)
+    #     if password != confirmation:
+    #         return flash("Password no coinciden bro xd")
 
-        userid = db.execute("SELECT * FROM users WHERE username = ?", username)
+    #     userid = db.execute("SELECT * FROM users WHERE username = ?", username)
 
-        if len(userid) == 1:
-            return apology("hay un usuario con ese name UnU", 400)
-        else:
-            hash = generate_password_hash(password)
+    #     if len(userid) == 1:
+    #         return flash("hay un usuario con ese name UnU")
+    #     else:
+    #         hash = generate_password_hash(password)
 
-            id_user = db.execute(
-                "INSERT INTO users (username, hash) VALUES (:username, :hash)", username=username, hash=hash)
-            session["user_id"] = id_user
-            flash("registrado")
-            return redirect('/')
+    #         id_user = db.execute(
+    #             "INSERT INTO users (username, hash) VALUES (:username, :hash)", username=username, hash=hash)
+    #         session["user_id"] = id_user
+    #         flash("registrado")
+    #         return redirect('/')
 
-    else:
-        return render_template("register.html")
+    # else:
+    return render_template("register.html")
 
 
 if __name__ == "__main__":

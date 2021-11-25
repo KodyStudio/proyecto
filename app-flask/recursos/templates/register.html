@@ -1,17 +1,10 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
-    <link href="{{ url_for('static', filename='css/login.css') }}" rel="stylesheet">
+{% extends 'layout.html'%}
 
-</head>
+{% block title %} Register {% endblock %}
+
+{% block content2 %} 
 
 <body class="bg-gradient-primary">
-
     <div class="container">
         <!-- Outer Row -->
         <div class="row justify-content-center">
@@ -23,7 +16,7 @@
                             <div class="col-lg-12">
                                 <div class="p-5">
                                     <div class="text-center">
-                                        <h1 class="h4 text-gray-900 mb-4">Bienvenido!</h1>
+                                        <h1 class="h4 text-gray-900 mb-4">Registro!</h1>
                                     </div>
                                     <form class="user">
                                         <div class="form-group">
@@ -33,22 +26,24 @@
                                         </div>
                                         <div class="form-group">
                                             <input type="password" class="form-control form-control-user"
-                                                id="exampleInputPassword" placeholder="Contraseña">
+                                                name="password" placeholder="Contraseña">
                                         </div>
-
+                                        <div class="form-group">
+                                            <input type="password" class="form-control form-control-user"
+                                                name="confirm" placeholder="Confirmar Contraseña">
+                                        </div>
                                         <div class="form-group">
                                             <div class="custom-control custom-checkbox small">
-                                               
+
                                             </div>
                                         </div>
-                                        
                                         <a href="index.html" class="btn btn-primary btn-user btn-block">
-                                            Login
+                                            Register
                                         </a>
                                     </form>
                                     <hr>
                                     <div class="text-center">
-                                        <a class="small" href="/register">Crear una cuenta nueva</a>
+                                        <a class="small" href="/login">Ya tengo una cuenta</a>
                                     </div>
                                 </div>
                             </div>
@@ -58,6 +53,6 @@
             </div>
         </div>
     </div>
-    
 </body>
-</html>
+
+{% endblock %}
