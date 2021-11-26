@@ -1,17 +1,11 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
-    <link href="{{ url_for('static', filename='css/login.css') }}" rel="stylesheet">
 
-</head>
+{% extends 'layout.html'%}
+
+{% block title %} Login {% endblock %}
+
+{% block content2 %} 
 
 <body class="bg-gradient-primary">
-
     <div class="container">
         <!-- Outer Row -->
         <div class="row justify-content-center">
@@ -25,7 +19,7 @@
                                     <div class="text-center">
                                         <h1 class="h4 text-gray-900 mb-4">Bienvenido!</h1>
                                     </div>
-                                    <form class="user">
+                                    <form action="/login" method="post" class="user">
                                         <div class="form-group">
                                             <input type="text" class="form-control form-control-user"
                                                 name="usuario" aria-describedby="emailHelp"
@@ -35,13 +29,14 @@
                                             <input type="password" class="form-control form-control-user"
                                                 id="exampleInputPassword" placeholder="Contraseña">
                                         </div>
-
+                                        
+                                        <!-- esto que?xd -->
                                         <div class="form-group">
                                             <div class="custom-control custom-checkbox small">
-                                               
+                                            
                                             </div>
                                         </div>
-                                        
+
                                         <a href="index.html" class="btn btn-primary btn-user btn-block">
                                             Login
                                         </a>
@@ -58,6 +53,6 @@
             </div>
         </div>
     </div>
-    
 </body>
-</html>
+
+{% endblock %}

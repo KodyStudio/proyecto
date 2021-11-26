@@ -18,10 +18,10 @@
                                     <div class="text-center">
                                         <h1 class="h4 text-gray-900 mb-4">Registro!</h1>
                                     </div>
-                                    <form class="user">
+                                    <form action="/register" method="post" class="user">
                                         <div class="form-group">
                                             <input type="text" class="form-control form-control-user"
-                                                name="usuario" aria-describedby="emailHelp"
+                                                name="username" autocomplete="off" aria-describedby="emailHelp"
                                                 placeholder="Usuario">
                                         </div>
                                         <div class="form-group">
@@ -30,16 +30,19 @@
                                         </div>
                                         <div class="form-group">
                                             <input type="password" class="form-control form-control-user"
-                                                name="confirm" placeholder="Confirmar Contraseña">
+                                                name="confirmation" placeholder="Confirmar Contraseña">
                                         </div>
+                                        <!-- esto que?xd -->
+                                        
                                         <div class="form-group">
                                             <div class="custom-control custom-checkbox small">
 
                                             </div>
                                         </div>
-                                        <a href="index.html" class="btn btn-primary btn-user btn-block">
+
+                                        <button type="submit" class="btn btn-primary btn-user btn-block">
                                             Register
-                                        </a>
+                                        </button>
                                     </form>
                                     <hr>
                                     <div class="text-center">

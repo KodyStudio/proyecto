@@ -102,37 +102,36 @@ def logout():
 @app.route("/register", methods=["GET", "POST"])
 def register():
     """Register user"""
+    if request.method == "POST":
+        username = request.form.get('username')
+        password = request.form.get('password')
+        confirmation = request.form.get('confirmation')
+        # sustituir los apology por flash cuando hay un error y rederizar a registro.html
+        if not username:
+            flash("Username es requerido")
+        elif not password:
+            flash("Password es requerido")
+        elif not confirmation:
+            flash("Confirmation es requerido")
 
-    # if request.method == "POST":
-    #     username = request.form.get('username')
-    #     password = request.form.get('password')
-    #     confirmation = request.form.get('confirmation')
-    #     # sustituir los apology por flash cuando hay un error y rederizar a registro.html
-    #     if not username:
-    #         return flash("Username es requerido")
-    #     elif not password:
-    #         return flash("Password es requerido")
-    #     elif not confirmation:
-    #         return flash("Confirmation es requerido")
+        if password != confirmation:
+            flash("Password no coinciden bro")
 
-    #     if password != confirmation:
-    #         return flash("Password no coinciden bro xd")
+        userid = db.execute("SELECT * FROM public.users WHERE username = ?", username)
 
-    #     userid = db.execute("SELECT * FROM users WHERE username = ?", username)
+        if len(userid) == 1:
+            flash("hay un usuario con ese name UnU")
+        else:
+            hash = generate_password_hash(password)
 
-    #     if len(userid) == 1:
-    #         return flash("hay un usuario con ese name UnU")
-    #     else:
-    #         hash = generate_password_hash(password)
+            id_user = db.execute(
+                "INSERT INTO users (username, hash) VALUES (:username, :hash)", username=username, hash=hash)
+            session["user_id"] = id_user
+            flash("registrado")
+            return redirect('/')
 
-    #         id_user = db.execute(
-    #             "INSERT INTO users (username, hash) VALUES (:username, :hash)", username=username, hash=hash)
-    #         session["user_id"] = id_user
-    #         flash("registrado")
-    #         return redirect('/')
-
-    # else:
-    return render_template("register.html")
+    else:
+        return render_template("register.html")
 
 
 if __name__ == "__main__":
