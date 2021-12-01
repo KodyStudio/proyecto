@@ -10,6 +10,6 @@ load_dotenv()
 
 engine = create_engine(os.getenv("DATABASE_URL"))
 db = scoped_session(sessionmaker(bind=engine))
-db.execute("CREATE TABLE public.users(id SERIAL PRIMARY KEY NOT NULL, username VARCHAR NOT NULL, hash VARCHAR NOT NULL)")
+db.execute("TRUNCATE TABLE users RESTART IDENTITY;")
 db.commit()
 print("tablas creadas")

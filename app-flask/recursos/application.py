@@ -32,8 +32,12 @@ db = scoped_session(sessionmaker(bind=engine))
 
 
 @app.route('/')
+@login_required
 def home():
-    return render_template('index.html')
+
+    user = db.execute("SELECT * FROM users WHERE id = :id",
+                      {"id" : session["user_id"]}).fetchone()["username"]
+    return render_template('index.html', user=user)
 
 
 @app.route('/home/add_product')
@@ -63,22 +67,35 @@ def login():
 
         # Ensure username was submitted
         if not request.form.get("username"):
-            return flash("must provide username", 403)
+            flash("Username es requerido")
+            return render_template("login.html")
 
         # Ensure password was submitted
         elif not request.form.get("password"):
-            return flash("must provide password", 403)
+            flash("Password es requerido")
+            return render_template("login.html")
 
         # Query database for username
-        rows = db.execute("SELECT * FROM users WHERE username = :username",
-                          username=request.form.get("username"))
+
+        count = 0
+        hash = Null
+        id = 0
+
+        for rows in db.execute("SELECT count(username), hash, id FROM users WHERE username = :username GROUP BY username, id, hash",
+                               {"username": request.form.get("username")}):
+            count = rows[0]
+            hash = rows['hash']
+            id = rows['id']
+
+        print(count)
 
         # Ensure username exists and password is correct
-        if len(rows) != 1 or not check_password_hash(rows[0]["hash"], request.form.get("password")):
-            return flash("invalid username and/or password", 403)
+        if count == 0 or not check_password_hash(hash, request.form.get("password")):
+            flash("invalid username and/or password")
+            return render_template("login.html")
 
         # Remember which user has logged in
-        session["user_id"] = rows[0]["id"]
+        session["user_id"] = id
 
         # Redirect user to home page
         return redirect("/")
@@ -109,26 +126,35 @@ def register():
         # sustituir los apology por flash cuando hay un error y rederizar a registro.html
         if not username:
             flash("Username es requerido")
+            return render_template("register.html")
         elif not password:
             flash("Password es requerido")
+            return render_template("register.html")
         elif not confirmation:
             flash("Confirmation es requerido")
+            return render_template("register.html")
 
         if password != confirmation:
             flash("Password no coinciden bro")
+            return render_template("register.html")
 
-        userid = db.execute("SELECT * FROM public.users WHERE username = ?", username)
+        userid = db.execute(
+            f"SELECT * FROM users WHERE username = '{request.form.get('username')}'").rowcount
 
-        if len(userid) == 1:
+        if userid > 0:
             flash("hay un usuario con ese name UnU")
-        else:
-            hash = generate_password_hash(password)
+            return render_template("register.html")
 
-            id_user = db.execute(
-                "INSERT INTO users (username, hash) VALUES (:username, :hash)", username=username, hash=hash)
-            session["user_id"] = id_user
-            flash("registrado")
-            return redirect('/')
+        hash = generate_password_hash(password)
+
+        db.execute(
+            "INSERT INTO users (username, hash) VALUES (:username, :hash)", {"username": username, "hash": hash})
+        db.commit()
+        id_user = db.execute("SELECT id FROM users WHERE username=:username",
+                             {"username": username, "hash": hash}).fetchone()["id"]
+        session["user_id"] = id_user
+        flash("registrado")
+        return redirect('/')
 
     else:
         return render_template("register.html")
