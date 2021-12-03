@@ -36,21 +36,42 @@ db = scoped_session(sessionmaker(bind=engine))
 def home():
 
     user = db.execute("SELECT * FROM users WHERE id = :id",
-                      {"id" : session["user_id"]}).fetchone()["username"]
+                      {"id": session["user_id"]}).fetchone()["username"]
     return render_template('index.html', user=user)
 
 
 @app.route('/home/add_product')
+@login_required
 def add_product():
-    return render_template('page-add-product.html')
+    return render_template('add-product.html')
+
+
+@app.route('/home/list_product')
+@login_required
+def list_product():
+    return render_template('list-product.html')
+
+
+@app.route('/home/add_sale')
+@login_required
+def add_sale():
+    return render_template('add-sale.html')
+
+
+@app.route('/home/add_platillo')
+@login_required
+def add_platillo():
+    return render_template('add-platillo.html')
 
 
 @app.route('/home/error')
+@login_required
 def error():
     return render_template('404.html')
 
 
 @app.route('/home/base')
+@login_required
 def base():
     return render_template('base.html')
 

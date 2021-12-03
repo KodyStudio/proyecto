@@ -3,14 +3,68 @@
 {% block title %} Dashboard {% endblock %}
 
 {% block content %} 
-        <p>{{ user }}</p>
-    <div class="container">
-        <div class="row">
-            <h1> 
-                Contenido del Dashboard
-            </h1>
+<div class="container-fluid">
+
+    <div class="row">
+        
+        <!-- saludo al usuario -->
+        <div class="col-lg-4">
+            <div class="card-body p-0 mt-lg-2 mt-0">
+                <h3 class="mb-3">Hola {{user}}, Buenos Dias!</h3>
+                <p class="mb-0 mr-4">Tu Dashboard le ofrece vistas del rendimiento de tu negocio.</p>
+            </div>
         </div>
+
+        <!-- ventas -->
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-primary shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                Ventas Totales</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">10000</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ingresos -->
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div class="card border-left-success shadow h-100 py-2">
+                <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col mr-2">
+                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                Ingresos Totales</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">$215,000</div>
+                        </div>
+                        <div class="col-auto">
+                            <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 
 
+    <canvas id="mycanvas" width="256" height="256"></canvas>
+
+    <script>
+
+        $(document).ready(function(){
+
+            var ctx = $("#mycanvas").get(0).getContext("2d");
+        });
+
+
+    </script>
+
+</div>
 {% endblock %}

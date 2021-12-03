@@ -17,7 +17,7 @@
                    <div class="card-body">
                        <form action="/" method="post" data-toggle="validator">
                            <div class="row">
-                               <div class="col-md-12">
+                               <!-- <div class="col-md-12">
                                    <div class="form-group">
                                        <label>Tipo de producto *</label>
                                        <select name="type" class="selectpicker form-control" data-style="py-0">
@@ -27,7 +27,7 @@
                                            <option>tipo 4</option>
                                        </select>
                                    </div> 
-                               </div>  
+                               </div>   -->
                                <div class="col-md-6">                      
                                    <div class="form-group">
                                        <label>Nombre *</label>
@@ -37,8 +37,8 @@
                                </div>    
                                <div class="col-md-6">
                                    <div class="form-group">
-                                       <label>codigo *</label>
-                                       <input type="text" name="category" class="form-control" placeholder="Ingresa el codigo" data-errors="Porfavor ingrese el codigo." required>
+                                       <label>Codigo *</label>
+                                       <input type="number" name="category" class="form-control" placeholder="Ingresa el codigo" data-errors="Porfavor ingrese el codigo." required>
                                        <div class="help-block with-errors"></div>
                                    </div>
                                </div> 
@@ -72,15 +72,15 @@
                                </div> -->
                                <div class="col-md-6">
                                    <div class="form-group">
-                                       <label>costo *</label>
-                                       <input type="text" name="code" class="form-control" placeholder="ingrese el costo" data-errors="Porfavor ingrese el costo." required>
+                                       <label>Costo *</label>
+                                       <input type="number" name="code" class="form-control" placeholder="ingrese el costo" data-errors="Porfavor ingrese el costo." required>
                                        <div class="help-block with-errors"></div>
                                    </div>
                                </div>
                                <div class="col-md-6">
                                    <div class="form-group">
-                                       <label>precio *</label>
-                                       <input type="text" name="stock" class="form-control" placeholder="Enter Price" data-errors="Please Enter Price." required>
+                                       <label>Precio *</label>
+                                       <input type="number" name="stock" class="form-control" placeholder="Ingresa el precio" data-errors="Please Enter Price." required>
                                        <div class="help-block with-errors"></div>
                                    </div>
                                </div>
@@ -88,25 +88,25 @@
                                <div class="col-md-12">                                    
                                    <div class="form-group">
                                        <label>Cantidad *</label>
-                                       <input type="text" name="value" class="form-control" placeholder="Enter Quantity" required>
+                                       <input type="number" name="value" class="form-control" placeholder="Ingresa la cantidad" required>
                                        <div class="help-block with-errors"></div>
                                    </div>
                                </div>
                                <div class="col-md-12">
                                    <div class="form-group">
-                                       <label>imagen</label>
+                                       <label>Imagen</label>
                                        <input type="file" class="form-control image-file" name="pic" accept="image/*">
                                    </div>
                                </div>
                                <div class="col-md-12">
                                    <div class="form-group">
-                                       <label>Description / Product Details</label>
+                                       <label>Descripcion / Detalles del producto</label>
                                        <textarea class="form-control" rows="4"></textarea>
                                    </div>
                                </div>
                            </div>                            
-                           <button type="submit" class="btn btn-primary mr-2">Add Product</button>
-                           <button type="reset" class="btn btn-danger">Reset</button>
+                           <button type="submit" class="btn btn-primary mr-2">Añadir Producto</button>
+                           <button type="reset" class="btn btn-danger">Reiniciar</button>
                        </form>
                    </div>
                </div>

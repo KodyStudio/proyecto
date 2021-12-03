@@ -14,11 +14,14 @@
 
     {% endblock %}
     
-    
     {% if get_flashed_messages() %}
     <header>
-        <div class="alert alert-primary border text-center" role="alert">
-            {{ get_flashed_messages() | join(" ") }}
+        <div class="container">
+            <div class="row">
+                <div class="alert alert-primary border" role="alert">
+                    {{ get_flashed_messages() | join(" ") }}
+                </div>
+            </div>
         </div>
     </header>
     {% endif %}
