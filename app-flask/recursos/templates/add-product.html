@@ -15,95 +15,73 @@
                        </div>
                    </div>
                    <div class="card-body">
-                       <form action="/" method="post" data-toggle="validator">
+
+                       <form action="/home/add_product" method="post" data-toggle="validator" autocomplete="off">
                            <div class="row">
-                               <!-- <div class="col-md-12">
-                                   <div class="form-group">
-                                       <label>Tipo de producto *</label>
-                                       <select name="type" class="selectpicker form-control" data-style="py-0">
-                                           <option>tipo 1</option>
-                                           <option>tipo 2</option>
-                                           <option>tipo 3</option>
-                                           <option>tipo 4</option>
-                                       </select>
-                                   </div> 
-                               </div>   -->
-                               <div class="col-md-6">                      
+
+                               <div class="col-md-12">                      
                                    <div class="form-group">
                                        <label>Nombre *</label>
-                                       <input type="text" name="name" class="form-control" placeholder="Ingrese el nombre del producto" data-errors="Porfavor ingresa el nombre." required>
-                                       <div class="help-block with-errors"></div>
-                                   </div>
-                               </div>    
-                               <div class="col-md-6">
-                                   <div class="form-group">
-                                       <label>Codigo *</label>
-                                       <input type="number" name="category" class="form-control" placeholder="Ingresa el codigo" data-errors="Porfavor ingrese el codigo." required>
-                                       <div class="help-block with-errors"></div>
-                                   </div>
-                               </div> 
-                               <!-- <div class="col-md-6"> 
-                                   <div class="form-group">
-                                       <label>Barcode Symbology *</label>
-                                       <select name="type" class="selectpicker form-control" data-style="py-0">
-                                           <option>CREM01</option>
-                                           <option>UM01</option>
-                                           <option>SEM01</option>
-                                           <option>COF01</option>
-                                           <option>FUN01</option>
-                                           <option>DIS01</option>
-                                           <option>NIS01</option>
-                                       </select>
-                                   </div>
-                               </div> 
-                               <div class="col-md-6">
-                                   <div class="form-group">
-                                       <label>Category *</label>
-                                       <select name="type" class="selectpicker form-control" data-style="py-0">
-                                           <option>Beauty</option>
-                                           <option>Grocery</option>
-                                           <option>Food</option>
-                                           <option>Furniture</option>
-                                           <option>Shoes</option>
-                                           <option>Frames</option>
-                                           <option>Jewellery</option>
-                                       </select>
-                                   </div>
-                               </div> -->
-                               <div class="col-md-6">
-                                   <div class="form-group">
-                                       <label>Costo *</label>
-                                       <input type="number" name="code" class="form-control" placeholder="ingrese el costo" data-errors="Porfavor ingrese el costo." required>
-                                       <div class="help-block with-errors"></div>
-                                   </div>
-                               </div>
-                               <div class="col-md-6">
-                                   <div class="form-group">
-                                       <label>Precio *</label>
-                                       <input type="number" name="stock" class="form-control" placeholder="Ingresa el precio" data-errors="Please Enter Price." required>
+                                       <input type="text" name="nombre" class="form-control" placeholder="Ingrese el nombre del producto" data-errors="Porfavor ingresa el nombre." required>
                                        <div class="help-block with-errors"></div>
                                    </div>
                                </div>
 
-                               <div class="col-md-12">                                    
+                               <div class="col-md-6">
                                    <div class="form-group">
-                                       <label>Cantidad *</label>
-                                       <input type="number" name="value" class="form-control" placeholder="Ingresa la cantidad" required>
+                                       <label>Costo *</label>
+                                       <input type="number" min="1" name="costo" class="form-control" placeholder="ingrese el costo" data-errors="Porfavor ingrese el costo." required>
                                        <div class="help-block with-errors"></div>
                                    </div>
                                </div>
+
+                               <div class="col-md-6">
+                                   <div class="form-group">
+                                       <label>Precio *</label>
+                                       <input type="number" min="1" name="precio" class="form-control" placeholder="Ingresa el precio" data-errors="Please Enter Price." required>
+                                       <div class="help-block with-errors"></div>
+                                   </div>
+                               </div>
+
+                               <div class="col-md-6">                                    
+                                   <div class="form-group">
+                                       <label>Cantidad *</label>
+                                       <input type="number" min="1" name="cantidad" class="form-control" placeholder="Ingresa la cantidad" required>
+                                       <div class="help-block with-errors"></div>
+                                   </div>
+                               </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Categoria *</label>
+
+                                        <select name="categoria" class="selectpicker form-control" data-style="py-0">
+
+                                        {% for categorias in categorias %}
+
+                                        <option value="{{categorias["nombre"]}}">{{categorias["nombre"]}}</option>
+
+                                        {% endfor %}
+
+                                        </select>
+                                        
+                                    </div> 
+                                </div>
+
                                <div class="col-md-12">
                                    <div class="form-group">
                                        <label>Imagen</label>
-                                       <input type="file" class="form-control image-file" name="pic" accept="image/*">
+                                       <input name="imagen" type="file" class="form-control image-file" accept="image/*">
                                    </div>
                                </div>
+
                                <div class="col-md-12">
                                    <div class="form-group">
                                        <label>Descripcion / Detalles del producto</label>
-                                       <textarea class="form-control" rows="4"></textarea>
+                                       <input name="descripcion" maxlength="10" placeholder="Descripcion breve del producto" class="form-control" rows="4">
                                    </div>
                                </div>
+
                            </div>                            
                            <button type="submit" class="btn btn-primary mr-2">Añadir Producto</button>
                            <button type="reset" class="btn btn-danger">Reiniciar</button>

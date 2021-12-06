@@ -10,6 +10,8 @@ load_dotenv()
 
 engine = create_engine(os.getenv("DATABASE_URL"))
 db = scoped_session(sessionmaker(bind=engine))
-db.execute("TRUNCATE TABLE users RESTART IDENTITY;")
+
+db.execute("INSERT INTO categorias(nombre) VALUES ('Frutas y verduras')")
+
 db.commit()
 print("tablas creadas")

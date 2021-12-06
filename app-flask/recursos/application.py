@@ -31,19 +31,39 @@ engine = create_engine(os.getenv("DATABASE_URL"))
 db = scoped_session(sessionmaker(bind=engine))
 
 
-@app.route('/')
+@app.route('/', methods=["GET", "POST"])
 @login_required
 def home():
 
-    user = db.execute("SELECT * FROM users WHERE id = :id",
+    user = db.execute(f"SELECT * FROM users WHERE id = :id",
                       {"id": session["user_id"]}).fetchone()["username"]
+
     return render_template('index.html', user=user)
 
 
-@app.route('/home/add_product')
+@app.route("/home/add_product", methods=["GET", "POST"])
 @login_required
 def add_product():
-    return render_template('add-product.html')
+
+    if request.method == "POST":
+        nombre = request.form.get("nombre")
+        costo = request.form.get("costo")
+        precio = request.form.get("precio")
+        cantidad = request.form.get("cantidad")
+        categoria = request.form.get("categoria")
+        imagen = request.form.get("imgen")
+        descripcion = request.form.get("descripcion")
+
+        return render_template("index.html", nombre=nombre, costo=costo, precio=precio, cnatidad=cantidad, categoria=categoria, descripcion=descripcion, imagen=imagen)
+
+    else:
+
+        user = db.execute("SELECT * FROM users WHERE id = :id",
+                          {"id": session["user_id"]}).fetchone()["username"]
+
+        categorias = db.execute(
+            "SELECT * FROM categorias WHERE nombre ilike '%%'")
+        return render_template("add-product.html", user=user, categorias=categorias)
 
 
 @app.route('/home/list_product')
