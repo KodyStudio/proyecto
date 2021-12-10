@@ -35,10 +35,13 @@
                                     <div class="form-group">
                                         <label>Platillos *</label>
                                         <select name="type" class="selectpicker form-control" data-style="py-0">
-                                            <option>platillo 1</option>
-                                            <option>platillo 2</option>
-                                            <option>platillo 3</option>
-                                            <option>platillo 4</option>
+
+                                            {% for platillos in platillos %}
+
+                                            <option value="{{platillos["nombre"]}}">{{platillos["nombre"]}}</option>
+    
+                                            {% endfor %}
+
                                         </select>
                                     </div> 
                                </div>                            

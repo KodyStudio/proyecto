@@ -155,34 +155,55 @@
                     </button>
 
                     <!-- Topbar Search -->
-                    <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-                        <div class="input-group">
+                    <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search" autocomplete="off">
 
-                            <div class="ctn-bars-search">
-                                <input type="text" id="inputSearch" class="form-control bg-light border-0 small" placeholder="Buscar..."
-                                    aria-label="Search" aria-describedby="basic-addon2">
-                            </div>
+                        <div class="input-group" id="icon-menu">
 
+                            <!-- <div id="ctn-bars-search"> -->
+                                <input type="text" id="inputSearch" class="form-control bg-light border-0 small" placeholder="Buscar..." 
+                                    aria-label="buscar" aria-describedby="basic-addon2">
+
+                                    <ul id="box-search" class="navbar-nav ml-auto">
+
+                                        <li class="nav-item dropdown">
+                                            <a class="dropdown-item d-flex align-items-center" href="/"><i class="fas fa-search"></i> Dashboard</a>
+                                        </li>
+                                        <li class="nav-item dropdown">
+                                            <a class="dropdown-item" href="/home/list_product"><i class="fas fa-search"></i> Lista de productos</a>
+                                        </li>
+                                        <li class="nav-item dropdown">
+                                            <a class="dropdown-item" href="/home/add_product"><i class="fas fa-search"></i> Añadir productos</a>
+                                        </li>
+                                        <li class="nav-item dropdown">
+                                            <a class="dropdown-item" href="/home/list_platillos"><i class="fas fa-search"></i> Lista de platillos</a>
+                                        </li>
+                                        <li class="nav-item dropdown">
+                                            <a class="dropdown-item" href="/home/add_product"><i class="fas fa-search"></i> Añadir platillos</a>
+                                        </li>
+                                        <li class="nav-item dropdown">
+                                            <a class="dropdown-item" href="#"><i class="fas fa-search"></i> Lista de venta</a>
+                                        </li>
+                                        <li class="nav-item dropdown">
+                                            <a class="dropdown-item" href="#"><i class="fas fa-search"></i> Añadir venta</a>
+                                        </li>
+    
+                                </ul>
+                            <!-- </div> -->
+                            
                             <div class="input-group-append">
-                                <button class="btn btn-primary" type="button">
+                                <button id="icon-search" class="btn btn-primary" class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <i class="fas fa-search fa-sm"></i>
                                 </button>
                             </div>
 
                         </div>
 
-                        <ul id="box-search">
-                            <li><a href="#"><i class="fas fa-search">HOLA1</i></a></li>
-                            <li><a href="#"><i class="fas fa-search">HOLA2</i></a></li>
-                            <li><a href="#"><i class="fas fa-search">HOLA3</i></a></li>
-                            <li><a href="#"><i class="fas fa-search">HOLA4</i></a></li>
-                            <li><a href="#"><i class="fas fa-search">HOLA5</i></a></li>
-                        </ul>
+
+
+                        <div id="cover-ctn-search"></div>
 
                     </form>
-
-
-
 
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
@@ -248,12 +269,25 @@
                 <!-- End of Topbar -->
 
                 <!-- Begin Page Content -->
-
+                {% if get_flashed_messages() %}
+                <header>
+                    <div class="container">
+                        <div class="row">
+                            <div class="alert alert-primary border" role="alert">
+                                {{ get_flashed_messages() | join(" ") }}
+                            </div>
+                        </div>
+                    </div>
+                </header>
+                {% endif %}
 
                 {% block content %}
 
 
                 {% endblock %}
+
+
+                
 
                 <!-- /.container-fluid -->
 
@@ -309,17 +343,17 @@
 
                 <div class="form-group">
                     <input type="password" class="form-control form-control-user" autocomplete="off" autocomplete="nope"
-                        name="password" id="exampleInputPassword" placeholder="Contraseña Actual">
+                        name="password1" id="exampleInputPassword1" placeholder="Contraseña Actual">
                 </div>
 
                 <div class="form-group">
                     <input type="password" class="form-control form-control-user" autocomplete="off" autocomplete="nope"
-                        name="password" id="exampleInputPassword" placeholder="Nueva Contraseña">
+                        name="password2" id="exampleInputPassword2" placeholder="Nueva Contraseña">
                 </div>
 
                 <div class="form-group">
                     <input type="password" class="form-control form-control-user" autocomplete="off" autocomplete="nope"
-                        name="password" id="exampleInputPassword" placeholder="Confirmar Nueva Contraseña">
+                        name="password3" id="exampleInputPassword3" placeholder="Confirmar Nueva Contraseña">
                 </div>
                 
                 <br>
@@ -345,7 +379,13 @@
 
      <script src="{{ url_for('static', filename='js/sb-admin-2.min.js')}}"></script>
 
-     <script src="{{ url_for('static', filename='js/Chart.js')}}"></script>
+     <script src="{{ url_for('static', filename='js/chart.js')}}"></script>
+     <script src="{{ url_for('static', filename='js/shearch.js')}}"></script>
+     <script src="{{ url_for('static', filename='js/app.js')}}"></script>
+     <!-- <script src="{{ url_for('static', filename='js/pdf.js')}}"></script>
+     <script src="{{ url_for('static', filename='js/html2pdf.bundle.min.js')}}"></script> -->
+     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
 
 </body>
 

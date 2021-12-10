@@ -51,6 +51,8 @@
                                    </div>
                                </div>
 
+                               <!-- Categoriiias -->
+
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label>Categoria *</label>
@@ -59,7 +61,7 @@
 
                                         {% for categorias in categorias %}
 
-                                        <option value="{{categorias["nombre"]}}">{{categorias["nombre"]}}</option>
+                                        <option value="{{categorias["id"]}}">{{categorias["nombre"]}}</option>
 
                                         {% endfor %}
 
@@ -68,10 +70,18 @@
                                     </div> 
                                 </div>
 
+
+                               <!-- IMAGEEEEEEEEEEEN -->
+                                
+                               <input id="url" name="url" hidden>
+
                                <div class="col-md-12">
+                                
                                    <div class="form-group">
                                        <label>Imagen</label>
-                                       <input name="imagen" type="file" class="form-control image-file" accept="image/*">
+                                       <input name="imagen" type="file" class="form-control image-file" id="img-uploader" >
+
+                                       <!-- <progress id="img-upload-bar" value="0" max="100" style="width: 100%"></progress> -->
                                    </div>
                                </div>
 

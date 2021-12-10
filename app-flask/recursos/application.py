@@ -50,11 +50,16 @@ def add_product():
         costo = request.form.get("costo")
         precio = request.form.get("precio")
         cantidad = request.form.get("cantidad")
-        categoria = request.form.get("categoria")
-        imagen = request.form.get("imgen")
+        id_categoria = request.form.get("categoria")
+        url = request.form.get("url")
         descripcion = request.form.get("descripcion")
 
-        return render_template("index.html", nombre=nombre, costo=costo, precio=precio, cnatidad=cantidad, categoria=categoria, descripcion=descripcion, imagen=imagen)
+        db.execute("INSERT INTO productos (nombre, costo, precio, id_categoria, imagen, descripcion, cantidad) VALUES (:nombre, :costo, :precio, :id_categoria, :imagen, :descripcion, :cantidad)", {
+                   "nombre": nombre, "costo": costo, "precio": precio, "id_categoria": id_categoria, "imagen": url, "descripcion": descripcion, "cantidad": cantidad})
+        db.commit()
+
+        flash("producto agregado")
+        return redirect("/")
 
     else:
 
@@ -69,19 +74,82 @@ def add_product():
 @app.route('/home/list_product')
 @login_required
 def list_product():
-    return render_template('list-product.html')
+
+    lista = db.execute(
+        "SELECT p.id AS id, p.id_categoria, p.nombre, costo, precio, cantidad, descripcion, imagen, c.id AS idcategoria, c.nombre AS categoria FROM productos p inner join categorias c on p.id_categoria=c.id")
+
+    user = db.execute("SELECT * FROM users WHERE id = :id",
+                      {"id": session["user_id"]}).fetchone()["username"]
+
+    return render_template('list-product.html', lista=lista, user=user)
+
+
+@app.route('/eliminar_productos/<id>')
+@login_required
+def eliminar_productos(id):
+
+    db.execute("DELETE FROM productos WHERE id=:id", {"id": id})
+    db.commit()
+
+    flash("xd")
+    return redirect('/')
+
+
+@app.route('/mensaje', methods=["GET"])
+@login_required
+def mensaje():
+
+    return render_template("message.html")
+
+# @app.route('/getjson', methods=["GET"])
+# def getjson():
+
+#     ap = db.execute("SELECT nombre FROM productos").fetchone()
+
+#     otra = []
+
+#     data = {
+#         "id":ap['nombre']
+
+#     }
+
+
+#     otra.append(data)
+
+#     return jsonify(data)
 
 
 @app.route('/home/add_sale')
 @login_required
 def add_sale():
-    return render_template('add-sale.html')
+
+    if request.method == "POST":
+        nombre = request.form.get("nombre")
+        imagen = request.form.get("imagen")
+        descripcion = request.form.get("descripcion")
+
+    else:
+
+        user = db.execute("SELECT * FROM users WHERE id = :id",
+                          {"id": session["user_id"]}).fetchone()["username"]
+
+        platillos = db.execute(
+            "SELECT * FROM platillos")
+
+        return render_template('add-sale.html', user=user)
 
 
 @app.route('/home/add_platillo')
 @login_required
 def add_platillo():
-    return render_template('add-platillo.html')
+
+    if request.method == "POST":
+        nombre = request.form.get("nombre")
+        imagen = request.form.get("imagen")
+        descripcion = request.form.get("descripcion")
+
+    else:
+        return render_template('add-platillo.html')
 
 
 @app.route('/home/error')
