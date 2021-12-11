@@ -101,22 +101,31 @@ def mensaje():
 
     return render_template("message.html")
 
-# @app.route('/getjson', methods=["GET"])
-# def getjson():
+@app.route('/getjson', methods=["GET"])
+def getjson():
 
-#     ap = db.execute("SELECT nombre FROM productos").fetchone()
+    ap = db.execute("SELECT * FROM productos").fetchall()
 
-#     otra = []
-
-#     data = {
-#         "id":ap['nombre']
-
-#     }
+    otra = []
+    for nombre in ap:
 
 
-#     otra.append(data)
+        data = {
+            "id":nombre['id'],
+            "nombre": nombre["nombre"],
+            "imagen": nombre["imagen"],
+            "precio": nombre["precio"],
 
-#     return jsonify(data)
+
+                }
+
+
+        otra.append(data)
+
+    return jsonify(otra)
+@app.route("/modal", methods=["GET"])
+def modal():
+    return render_template("modal.html")
 
 
 @app.route('/home/add_sale')
