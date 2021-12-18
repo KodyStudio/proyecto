@@ -1,6 +1,6 @@
 {% extends 'base.html'%}
 
-{% block title %} Lista producto {% endblock %}
+{% block title %} Lista de platillos {% endblock %}
 
 {% block content %} 
 
@@ -9,18 +9,17 @@
         <div class="card-body">
             <div class="d-flex flex-wrap flex-wrap align-items-center justify-content-between mb-4">
                 <div>
-                    <h4 class="mb-3">Lista de productos</h4>
+                    <h4 class="mb-3">Lista de Platillos</h4>
                 </div>
-                <a href="/home/add_product" class="btn btn-primary add-list"><i class="fas fa-plus-circle mr-3"></i>Añadir Productos</a>
+                <a href="/home/add_platillo" class="btn btn-primary add-list"><i class="fas fa-plus-circle mr-3"></i>Añadir Platillos</a>
             </div>
         </div>
     </div>
 
         <!-- ¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡¡ -->
-
         <div class="card shadow mb-4">
             <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">Listas de productos</h6>
+                <h6 class="m-0 font-weight-bold text-primary">Lista de Platillos</h6>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -35,10 +34,8 @@
                                   </div>
                                </th>
                                <th>Productos</th>
-                               <th>Categoria</th>
                                <th>Precio</th>
                                <th>Costo</th>
-                               <th>Cantidad</th>
                                <th>Acción</th>
                             </tr>
                          </thead>
@@ -62,15 +59,13 @@
                                      </div>
                                   </div>
                                </td>
-                               <td>{{productos["categoria"]}}</td>
                                <td>C$ {{productos["precio"]}}</td>
                                <td>C$ {{productos["costo"]}}</td>
-                               <td>{{productos["cantidad"]}}</td>
                                <td>
                                   <!-- accion -->
                                   <div class="d-flex align-items-center list-action">
                                      <a class="badge bg-warning" data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"
-                                        href="/eliminar_productos/{{productos["id"]}}"><i class="ri-delete-bin-5-line mr-0"></i></a>
+                                        href="/eliminar_platillos/{{productos["id"]}}"><i class="ri-delete-bin-5-line mr-0"></i></a>
                                   </div>
                                </td>
                             </tr>

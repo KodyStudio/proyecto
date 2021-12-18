@@ -4,14 +4,17 @@
 
 {% block content %} 
 <div class="container-fluid">
-
-    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+   
+        <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+
         <button id="btnCrearPdf" href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
                     class="fas fa-download fa-sm text-white-50"></i> Generar Reporte</button>
-    </div>
+
+        </div>
 
 
+    
     <div class="row">
         
         <!-- saludo al usuario -->
@@ -30,7 +33,7 @@
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                                 Ventas Totales</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">10000</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ventat}}</div>
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-calendar fa-2x text-gray-300"></i>
@@ -48,7 +51,7 @@
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                                 Ingresos Totales</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">$215,000</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">C$ {{total}}</div>
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
@@ -59,24 +62,20 @@
         </div>
     </div>
 
+
     <!-- compras recientes -->
     <div class="row">
         
         <div class="col-xl-8 col-lg-7">
-
-            <!-- Area Chart -->
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">Area Chart</h6>
+                    <h6 class="m-0 font-weight-bold text-primary">Productos</h6>
                 </div>
-                <div class="card-body">
-                    <div class="chart-area">
-                        <canvas id="myAreaChart"></canvas>
-                    </div>
-                    <hr>
-                    Styling for the area chart can be found in the
-                    <code>/js/demo/chart-area-demo.js</code> file.
-                </div>
+
+
+                    <canvas id="myChart"></canvas>
+ 
+
             </div>
         </div>
 
@@ -87,51 +86,107 @@
                 </div>
                     <div class="card-body">
                     <!-- Dropdown - Alerts -->
+                    {% for ventas in ventas %}
+
                         <div class="d-flex align-items-center" href="#">
                             <div class="mr-3">
                                 <div class="icon-circle bg-success">
                                     <i class="fas fa-donate text-white"></i>
                                 </div>
                             </div>
+
                             <div>
-                                <div class="small text-gray-500 font">Diciembre 12, 2021</div>
-                                <span >¡Se han depositado $290.29 en su cuenta!</span>
+                                <div class="small text-gray-500 font">{{ventas["fecha"]}}</div>
+                                <span >¡Se han depositado C${{ventas["total"]}} en su cuenta!</span>
                             </div>
+
                         </div>
                         <hr>
-                        <div class="d-flex align-items-center" href="#">
-                            <div class="mr-3">
-                                <div class="icon-circle bg-success">
-                                    <i class="fas fa-donate text-white"></i>
-                                </div>
-                            </div>
-                            <div>
-                                <div class="small text-gray-500">Diciembre 7, 2021</div>
-                                ¡Se han depositado $290.29 en su cuenta!
-                            </div>
-                        </div>
+                        
+                    {% endfor %}
                         <hr>
-                        <div class="d-flex align-items-center" href="/add/producto">
-                            <div class="mr-3">
-                                <div class="icon-circle bg-success">
-                                    <i class="fas fa-donate text-white"></i>
-                                </div>
-                            </div>
-                            <div>
-                                <div class="small text-gray-500">Diciembre 2, 2021</div>
-                               <p>¡Se han depositado $290.29 en su cuenta!</p> 
-                            </div>
-                        </div>
-                        <hr>
-                        <a class="dropdown-item text-center small text-gray-500" href="#">ver todas las compras</a>
+                        <a class="dropdown-item text-center small text-gray-500" href="/home/list_sale">ver todas las ventas</a>
                 </div>
             </div>
         </div>
     </div>
 
-    </div> 
-</div>
+
+
+    <div class="row">
+        
+        <div class="col-lg-12">
+            <div class="card shadow mb-4">
+                <div class="card-header d-flex align-items-center justify-content-between">
+                    <div class="header-title">
+                        <h4 class="card-title">Platillos más vendidos</h4>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                    {% for plat in plat %}
+                            <div class="col-lg-3">
+                                <div class="card card-block card-stretch card-height mb-0">
+                                    <div class="card-body">
+                                        <div class="bg-warning-light rounded">
+                                            <img src="{{plat["imagen"]}}" class="style-img img-fluid m-auto p-3" alt="image">
+                                        </div>
+                                        <div class="style-text text-left mt-3">
+                                            <h5 class="mb-1">{{plat["nombre"]}}</h5>
+                                            <p class="mb-0">C${{plat["precio"]}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                    {% endfor %}
+                    </div>
+            </div>
+        </div>
+
+    </div>
+</div> 
+    <script>
+
+        const ctx = document.getElementById('myChart');
+        const myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                
+                labels: ['{{prod1n}}', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+                datasets: [{
+                    
+                    data: [{{prod1c}}, 19, 3, 5, 2, 3],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(255, 159, 64, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+    </script>
+
 <script src="{{ url_for('static', filename='js/pdf.js')}}"></script>
 <script src="{{ url_for('static', filename='js/html2pdf.bundle.min.js')}}"></script>
-<script src="{{ url_for('static', filename='js/chart-area-demo.js')}}"></script>
 {% endblock %}

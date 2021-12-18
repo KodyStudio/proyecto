@@ -15,38 +15,54 @@
                            </div>
                        </div>
                        <div class="card-body">
-                           <form action="/" method="post" data-toggle="validator">
+                           <form action="/home/add_sale" method="post" data-toggle="validator">
                                <div class="row">
+
                                    <div class="col-md-6">                      
                                        <div class="form-group">
                                            <label>Fecha</label>
-                                           <input type="date" name="name" class="form-control" placeholder="Ingrese la fecha" data-errors="Porfavor ingresa la fecha." required>
+                                           <input type="date" name="fecha" class="form-control" placeholder="Ingrese la fecha" data-errors="Porfavor ingresa la fecha." required>
                                            <div class="help-block with-errors"></div>
                                        </div>
                                    </div>    
+
                                    <div class="col-md-6">
                                        <div class="form-group">
                                            <label>Cliente</label>
-                                           <input type="text" name="category" class="form-control" placeholder="ingrese el nombre del cliente" data-errors="Porfavor ingrese el nombre del cliente." required>
+                                           <input type="text" name="cliente" class="form-control" placeholder="ingrese el nombre del cliente" data-errors="Porfavor ingrese el nombre del cliente." required>
                                            <div class="help-block with-errors"></div>
                                        </div>
                                    </div> 
-                                   <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label>Platillos *</label>
-                                        <select name="type" class="selectpicker form-control" data-style="py-0">
 
-                                            {% for platillos in platillos %}
+                                   <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Platillos *</label>
+                                            <select name="platillo" class="selectpicker form-control" data-style="py-0">
 
-                                            <option value="{{platillos["nombre"]}}">{{platillos["nombre"]}}</option>
-    
-                                            {% endfor %}
+                                                {% for platillos in platillos %}
 
-                                        </select>
+                                                <option value="{{platillos["id"]}}">{{platillos["nombre"]}}</option>
+        
+                                                {% endfor %}
+
+                                            </select>
+                                        </div> 
+                                    </div>     
+                                    
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label>Cantidad</label>
+                                            <input type="number" name="cantidad" class="form-control" placeholder="ingrese la cantidad" data-errors="Porfavor ingrese la cantidad" required>
+                                            <div class="help-block with-errors"></div>
+                                        </div>
                                     </div> 
-                               </div>                            
+
+                                <h1>{{precio}}</h1>
+
+                                </div>                      
                                <button type="submit" class="btn btn-primary mr-2">Añadir Venta</button>
                                <button type="reset" class="btn btn-danger">Reiniciar</button>
+                               
                            </form>
                        </div>
                    </div>

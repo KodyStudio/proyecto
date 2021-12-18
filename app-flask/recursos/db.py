@@ -25,10 +25,7 @@ db = scoped_session(sessionmaker(bind=engine))
 # db.execute("create table detalle_producto(id serial primary key NOT NULL, cantidad_productos integer, id_productos integer references productos, id_platillos integer references platillos)")
 # db.execute("ALTER TABLE productos ADD cantidad integer")
 
-
-print(lista.keys())
-
-for lista in lista:
-    print (lista["id"])
+db.execute("ALTER TABLE ventas ADD cantidad integer")
+db.commit()
 
 print("tablas creadas")
